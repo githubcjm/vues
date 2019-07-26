@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="search">
+        <div v-html='computedmes'> </div>
+    </div>
+
+    <script src="../src/vue.js"></script>
+
+    <script>var vm = new Vue({
+            el: '#app',
+            data: {
+                mes: '今星期四星期三星期二星期一星期天星期六',
+                search: ''
+            },
+            computed: {
+                computedmes() {
+                    var arr = this.mes.split(this.search);
+                    var str = arr.join("<span style='color:red'>" + this.search + '</span>')
+                    console.log(arr);
+
+                    console.log(str);
+
+                    // < p > <b>你好</b>123456 < b > 你好</b > 123456</p >
+                    return str
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

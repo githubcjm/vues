@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    /* height: 50px; */
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    /* background-color: red; */
+}
+
+.changeId {
+    height: 100px;
+    /* width: 300px; */
+    width: 100%;
+    background: lightcyan;
+}
+
+.changeId h3 {
+    color: black;
+    float: left;
+}
+
+.changeId input {
+    margin-top: 50px;
+    float: left;
+    height: 30px;
+    width: 330px;
+}
+
+.adr {
+    display: none;
+    color: black;
+    background: white;
+    /* height: 80px; */
+    /* width: 300px; */
+    width: 100%;
+    font-size: 20px;
+}
+
+.change2 {
+
+    float: left;
+    height: 40px;
+    width: 100%;
+    background: lightcyan;
+}
+
+.adr input {
+    height: 30px;
+    width: 300px;
+    background: #e9e9e9;
+}

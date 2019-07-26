@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <p>你好123456你好123456</p> -->
+    <div id="demo">
+
+    </div>
+    <script src="./src/vue.js"></script>
+    <script>
+        var vue = new Vue({
+            el: '#demo',
+            data: {
+                html: ` `
+            },
+            computed: {
+                nameEn() {
+                    var html = this.html;
+                    // 
+                    return html
+                }
+            },
+            watch: {
+                html() {
+                    console.log(123);
+
+                }
+            },
+            template: `  <div><p v-text="nameEn"  >  </p> 
+                <input v-model="html"></input>
+                </div>`
+        })
+    </script>
+</body>
+
+</html>

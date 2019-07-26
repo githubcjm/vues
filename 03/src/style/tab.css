@@ -1,0 +1,31 @@
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    padding: 50px;
+}
+
+.tab input {
+    width: 80px;
+    height: 40px;
+}
+
+.tab .active {
+    background: red;
+}
+
+.tab .con {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #000;
+    display: block;
+}
+
+.tab .con1 {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #000;
+    display: block;
+}
