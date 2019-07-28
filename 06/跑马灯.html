@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tex1 {
+            color: red;
+        }
+
+        .tex2 {
+            color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <input type="button" value="浪起来" @click="show">
+        <input type="button" value="别浪" @click="unshow">
+        <div v-html="msg" :style="styleColor " :class="['tex1 tex2',{tex3:is3}] "> </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                color: 'red',
+                msg: '猥琐发育,别浪--!',
+                stop: null,
+                is3: false,
+                styleColor: { color: 'red', fontSize: '156px' }
+            },
+            //点击按钮的时候截取字符串第一个字，放到字符串最后，再拼接
+            methods: {
+                show() {
+                    if (this.stop != null) {
+                        return
+                    }
+                    this.stop = setInterval(() => {
+                        // console.log(this.msg);
+                        //切割第一个字
+                        start = (this.msg).slice(0, 1)
+                        //切割后面的字
+                        end = (this.msg).slice(1)
+                        //拼接
+                        this.msg = end + start
+                    }, 400)
+                },
+                unshow() {
+                    clearInterval(this.stop);
+                    this.stop = null;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

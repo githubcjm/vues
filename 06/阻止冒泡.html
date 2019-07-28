@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .msg {
+            height: 50px;
+            width: 100%;
+            background: limegreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <div class="msg" @click="msgs">
+            <input type="button" @click.stop="show" value="点击">
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>new Vue({
+            el: '#demo',
+            data: {
+
+            },
+            methods: {
+                show() {
+                    console.log('点击了按钮');
+                },
+                msgs() {
+                    console.log('点击了背景色');
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

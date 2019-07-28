@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+    </div>
+
+    <script src="../vue.js"></script>
+
+    <script>
+        var myFooter = Vue.extend({
+            //选项
+            data() {
+                return {
+                    name: 'cjm',
+                    age: 18
+                }
+            },
+            template: ` <div>
+            <p v-text="name"></p>
+        </div>`
+        })
+
+        Vue.component('my-Footer', myFooter);
+
+
+        //组件
+        // Vue.component('my-header', {
+        //     //选项
+        //     data() {
+        //         return {
+        //             name: 'cjm',
+        //             age: 18
+        //         }
+        //     },
+        //     template: ` <div>
+        //     <p v-text="name"></p>
+        // </div>`
+        // })
+
+        //创建实例化对象
+        new Vue({
+            //视图层
+            el: '#demo',
+            //数据层
+            data: {
+                name: 'jinming'
+            },
+            template: `  <my-Footer></my-Footer>`
+        })
+    </script>
+</body>
+
+</html>

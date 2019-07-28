@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.directive('jinming', (el, binding, vnode) => {
+            el.style.color = binding.value,
+                console.log('触发指令')
+            // 这里将会被 `bind` 和 `update` 调用
+        })
+        new Vue({
+            el: '#demo',
+            data: {
+                color: 'red',
+            },
+            template: `<div>
+                <p v-jinming="'blue'">123 </p> 
+                <p v-jinming="color">456 </p> 
+                </div>`,
+
+        })
+    </script>
+</body>
+
+</html>

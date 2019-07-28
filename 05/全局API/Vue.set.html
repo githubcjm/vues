@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <p v-html="version"></p>
+        <button @click="dataChange" v-html="name"></button>
+    </div>
+    <script src="../vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#demo',
+            //数据层
+            //选项
+            data: {
+                version: Vue.version,
+                name: 'chenjinming'
+            },
+            //方法
+            methods: {//函数
+                dataChange() {
+                    let obj = {
+                        name: 'cjm',
+                        age: 24,
+                    }
+                    console.log(obj);
+                    Vue.set(obj, "name", 'chen')
+                    console.log(obj);
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

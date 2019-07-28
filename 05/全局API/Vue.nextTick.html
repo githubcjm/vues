@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <p v-html="version"></p>
+        <button @click="dataChange" v-html='btn'></button>
+    </div>
+    <script src="../vue.js"></script>
+
+    <script>
+        new Vue({
+            //视图层
+            el: '#demo',
+            //数据层
+            //选项
+            data: {
+                btn: "点击",
+                version: Vue.version,
+            },
+            //方法
+            methods: {
+                dataChange() {
+                    this.$nextTick(function () {
+                        console.log(this.$el.innerHTML);
+
+                    })
+                    this.version = '1.6.0'
+                    console.log(this.$el.innerHTML);
+                    this.$nextTick(function () {
+                        console.log(this.$el.innerHTML);
+
+                    })
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

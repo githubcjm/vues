@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <input type="button" value="按钮" @click="show">
+        <p v-text='name'> </p>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                name: '按钮'
+            },
+            //vue里面的实例方法
+            methods: {
+                show() {
+                    alert("hello world")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

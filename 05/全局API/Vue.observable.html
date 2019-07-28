@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tes {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+    </div>
+    <div id="demo1">
+    </div>
+    <script src="../vue.js"></script>
+
+    <script>
+        const state = Vue.observable({
+            count: 0,
+            name: 'cjm',
+            chinese: '陈金明'
+        })
+        new Vue({
+            el: '#demo',
+            //数据层
+            //选项
+            data: {
+                count: state.count,
+                name: state.name,
+            },
+            template: `<div> <p v-text="name"></p></div> `
+        })
+        new Vue({
+            el: '#demo1',
+            //数据层
+            //选项
+            data: {
+                count: state.count,
+                chinese: state.chinese,
+                color: "red",
+                tes: 'tes'
+            },
+            template: `<div> <p v-text="chinese" :class="[tes]"></p></div>`
+        })
+
+    </script>
+</body>
+
+</html>
