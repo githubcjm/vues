@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <label for="id">id</label>
+        <input type="text" id="id" v-model="id">
+        <label for="name" id="name">name</label>
+        <input type="text" id="name" v-model="name">
+
+        <button @click="add">添加</button>
+        <div v-for="item in list" :key="item.id">
+            <input type="checkbox">{{item.id}}{{item.name}}
+        </div>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        //遍历数据，渲染到页面，点击按钮时以对象形式插入到M层的数组里，Vue自动更新自身数据，会自动渲染
+        new Vue({
+            //视图层
+            el: '#demo',
+            //数据层
+            data: {
+                id: '',
+                name: '',
+                list: [{
+                    name: '篮球',
+                    id: 1
+                },
+                {
+                    name: '排球',
+                    id: 2
+                }, {
+                    name: '羽毛球',
+                    id: 3
+                }, {
+                    name: '滑轮',
+                    id: 4
+                }]
+            },
+            methods: {
+                add() {
+                    this.list.push({
+                        id: this.id, name: this.name
+                    })
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
