@@ -3,8 +3,8 @@
     <Header />
     <List />
     <Main />
-    <ListView />
-    <Shehui />
+    <!-- <ListView /> -->
+    <!-- <Shehui /> -->
     <!-- <Hot /> -->
   </div>
   <!-- 这里放组件 -->
@@ -17,9 +17,9 @@ import List from "./components/List";
 import Main from "./components/Main";
 
 //隐藏事件
-import ListView from "./components/List-view";
+// import ListView from "./components/List-view";
 // import Hot from "./components/Hot";
-import Shehui from "./components/Shehui";
+// import Shehui from "./components/Shehui";
 
 export default {
   //这里放注册
@@ -28,11 +28,11 @@ export default {
     Header,
     List,
     //视频
-    ListView,
+    // ListView,
     //热点
     // Hot,
     //社会
-    Shehui,
+    // Shehui,
 
     Main
   }
