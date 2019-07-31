@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './index.css'
+// import './index.css'
 
 //全局引入axios
 import axios from 'axios'
