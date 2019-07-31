@@ -32,7 +32,10 @@ import {
 import {
     Card
 } from 'vant';
-
+//登录
+import {
+    Field
+} from 'vant';
 
 export default () => {
     Vue.use(Divider);
@@ -42,4 +45,5 @@ export default () => {
     Vue.use(Tabbar).use(TabbarItem);
     Vue.use(Swipe).use(SwipeItem);
     Vue.use(Card);
+    Vue.use(Field);
 }

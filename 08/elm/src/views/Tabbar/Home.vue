@@ -20,6 +20,7 @@
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
+            @click="navTo(index)"
             :key="index"
             :icon="k.image_hash"
             :text="k.name"
@@ -31,6 +32,7 @@
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
+            @click="navTo(index)"
             :key="index"
             :icon="k.image_hash"
             :text="k.name"
@@ -42,6 +44,7 @@
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
+            @click="navTo(index)"
             :key="index"
             :icon="k.image_hash"
             :text="k.name"
@@ -53,6 +56,7 @@
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
+            @click="navTo(index)"
             :key="index"
             :icon="k.image_hash"
             :text="k.name"
@@ -102,24 +106,18 @@
       <van-dropdown-item v-model="value1" :options="outside|handleMenu" />
     </van-dropdown-menu>
     <!-- 列表页 -->
-  <van-card v-for="(j,keys) in res " :key="keys"
-  num="2"
-  price="2.00"
-  desc="描述信息"  
-  :title="j.restaurant.name"
-  :thumb="j.restaurant.image_path"
-/>
-
-
-    <!-- 标签栏 -->
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search">发现</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">订单</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">我的</van-tabbar-item>
-    </van-tabbar>
+    <van-card
+      v-for="(j,keys) in res "
+      :key="keys"
+      num="2"
+      price="2.00"
+      desc="描述信息"
+      :title="j.restaurant.name"
+      :thumb="j.restaurant.image_path"
+    />
   </div>
 </template>
+
 
 <script>
 export default {
@@ -141,6 +139,12 @@ export default {
   methods: {
     onSearch() {
       console.log(123);
+    },
+    navTo(id) {
+      this.$router.push({
+        name: "detail",
+        params: { id, name: "lin" }
+      });
     }
   },
   //计算属性
@@ -169,7 +173,6 @@ export default {
     );
     this.res = list.data.items;
     console.log(this.res);
-    
   },
   //过滤器
   filters: {
@@ -182,8 +185,7 @@ export default {
       });
       return newMenu;
     }
-  },
-
+  }
 };
 //   window.onscroll = () => {
 //   let topY = scrollY;
@@ -194,27 +196,4 @@ export default {
 //       created();
 //   }
 // };
-
 </script>
-
-
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-}
-.fix {
-  position: flex;
-  top: 0px;
-}
-h2 {
-  font-size: 15px;
-  color: white;
-
-  margin-left: 20px;
-}
-</style>
-
-
-
