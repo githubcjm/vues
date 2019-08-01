@@ -3,38 +3,34 @@ import Vue from 'vue'
 //搜索
 import {
     Search
-} from 'vant';
-//宫格
-import {
+    //宫格
+    ,
     Grid,
     GridItem
-} from 'vant';
-//分割线
-import {
+    //分割线
+    ,
     Divider
-} from 'vant';
-//下拉菜单
-import {
+    //下拉菜单
+    ,
     DropdownMenu,
-    DropdownItem
-} from 'vant';
-//底部标签栏
-import {
+    DropdownItem,
+    //底部标签栏
     Tabbar,
-    TabbarItem
-} from 'vant';
-//轮播图
-import {
+    TabbarItem,
     Swipe,
-    SwipeItem
-} from 'vant';
-//列表页
-import {
-    Card
-} from 'vant';
-//登录
-import {
-    Field
+    SwipeItem,
+    Card,
+    // 单元格 
+    Cell,
+    CellGroup,
+    //List
+    List,
+    Field,
+    //导航栏
+    NavBar,
+    //索引兰
+    IndexBar,
+    IndexAnchor
 } from 'vant';
 
 export default () => {
@@ -46,4 +42,8 @@ export default () => {
     Vue.use(Swipe).use(SwipeItem);
     Vue.use(Card);
     Vue.use(Field);
+    Vue.use(Cell).use(CellGroup);
+    Vue.use(List);
+    Vue.use(NavBar);
+    Vue.use(IndexBar).use(IndexAnchor);
 }

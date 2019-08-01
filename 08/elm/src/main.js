@@ -9,16 +9,31 @@ import axios from 'axios'
 import VueRouter from 'vue-router'
 // 安装路由
 Vue.use(VueRouter)
+//引入状态管理
+import store from './store'
 
 
 // import Home from './components/Home.vue'
 import Tabbar from './views/Tabbar'
-import Detail from './views/Detail'
-import Home from './views/Tabbar/Home.vue'
-import Order from './views/Tabbar/Order.vue'
-import Dingdan from './views/Tabbar/Dingdan.vue'
-import Mine from './views/Tabbar/Mine.vue'
-import Sign from './views/Sign.vue'
+
+// import Detail from './views/Detail'
+//懒加载
+const Detail = () => import('./views/Detail')
+const Home = () => import('./views/Tabbar/Home.vue')
+const Order = () => import('./views/Tabbar/Order.vue')
+const Dingdan = () => import('./views/Tabbar/Dingdan.vue')
+const Mine = () => import('./views/Tabbar/Mine.vue')
+const Sign = () => import('./views/Sign.vue')
+const Adr = () => import('./views/Adr.vue')
+
+
+
+//同步加载
+// import Home from './views/Tabbar/Home.vue'
+// import Order from './views/Tabbar/Order.vue'
+// import Dingdan from './views/Tabbar/Dingdan.vue'
+// import Mine from './views/Tabbar/Mine.vue'
+// import Sign from './views/Sign.vue'
 // 定义路由组件
 // const Homes = {
 //   render(h) {
@@ -31,10 +46,17 @@ import Sign from './views/Sign.vue'
 //   }
 // }
 
+//路由
 const routes = [{
     name: 'detail',
     path: '/detail',
     component: Detail
+  },
+  //地址
+  {
+    name: 'adr',
+    path: '/adr',
+    component: Adr
   },
   //登录
   {
@@ -67,6 +89,7 @@ const routes = [{
       }
     ]
   }, {
+    name: 'home',
     path: '/',
     redirect: '/tabbar/home'
   }
@@ -86,7 +109,7 @@ router.beforeEach(async (to, from, next) => {
     },
   });
   let islogin = data.data.data.status;
-  if (islogin || to.path === "/sign" || to.path === "/tabbar/home" || to.path === "/detail") {
+  if (islogin || to.path === "/sign" || to.path === "/tabbar/home" || to.path === "/detail" || to.path === "/adr" || to.path === "/tabbar/order") {
     next();
   } else {
     router.push({
@@ -109,6 +132,7 @@ Vant()
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')

@@ -2,21 +2,16 @@
   <div>
     <!-- //搜索 -->
     <div style=" background:#0af;margin-button:10px;">
-      <h2>广州市千峰</h2>
+      <!-- 写点击事件，触发另一个地址路由 -->
+      <h2 style="display:inline" @click="adrto">选择地址</h2>
     </div>
-    <van-search
-      v-bind:class="fix"
-      label="广州"
-      background="#0af"
-      placeholder="请输入搜索关键词"
-      v-model="value"
-    />
+    <van-search :class="{searchfix}" background="#0af" placeholder="请输入搜索关键词" v-model="value" />
     <!-- //导航滑块 -->
 
     <!-- 轮播图 -->
     <van-swipe :autoplay="3000" indicator-color="white">
       <van-swipe-item>
-        <van-grid>
+        <van-grid style="margin-top:13px;">
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
@@ -28,7 +23,7 @@
         </van-grid>
       </van-swipe-item>
       <van-swipe-item>
-        <van-grid>
+        <van-grid style="margin-top:13px;">
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
@@ -40,7 +35,7 @@
         </van-grid>
       </van-swipe-item>
       <van-swipe-item>
-        <van-grid>
+        <van-grid style="margin-top:13px;">
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
@@ -52,7 +47,7 @@
         </van-grid>
       </van-swipe-item>
       <van-swipe-item>
-        <van-grid>
+        <van-grid style="margin-top:13px;">
           <!-- 宫格 -->
           <van-grid-item
             v-for="(k,index) in entrieslistcomputed"
@@ -68,17 +63,19 @@
     <div>
       <!---->
       <!---->
-      <div class="index-1ECZ3_0">
-        <section id="activity-lego" class="index-1y1Q5_0">
-          <div class="index-3xB2N_0">
-            <div class="index-Q3GS5_0 index-1xT5J_0">
-              <h3 scan-data="{item.title}" class="index-1qvN6_0">品质套餐</h3>
-              <div class="index-2W67h_0">搭配齐全吃得好</div>
-              <div class="index-1DFa7_0">
+      <div class="box">
+        <section>
+          <div>
+            <div>
+              <h3 style="margin-top:23px;">品质套餐</h3>
+              <div>搭配齐全吃得好</div>
+              <div style="font-size:12px;color:orange">
                 <!---->
                 立即抢购 &gt;
               </div>
               <img
+                style="heigth:93px;width:131px;position:absolute;right:0px;
+                top:13px;"
                 src="https://fuss10.elemecdn.com/e/ee/df43e7e53f6e1346c3fda0609f1d3png.png?imageMogr/format/webp/thumbnail/!282x188r/gravity/Center/crop/282x188/"
               />
             </div>
@@ -101,20 +98,31 @@
     <!-- 分割线 -->
     <van-divider :style="{ color: 'black', borderColor: 'black', padding: '0 16px' }">推荐商家</van-divider>
     <!-- 下拉菜单 -->
-    <van-dropdown-menu>
+    <van-dropdown-menu :class="{fixe}">
       <van-dropdown-item v-model="value1" :options="outside|handleMenu" />
       <van-dropdown-item v-model="value1" :options="outside|handleMenu" />
     </van-dropdown-menu>
-    <!-- 列表页 -->
-    <van-card
-      v-for="(j,keys) in res "
-      :key="keys"
-      num="2"
-      price="2.00"
-      desc="描述信息"
-      :title="j.restaurant.name"
-      :thumb="j.restaurant.image_path"
-    />
+    <!-- //懒加载 -->
+    <van-list
+      style="margin-bottom:50px"
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getshopList"
+    >
+      <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
+
+      <!-- 列表页 -->
+      <van-card
+        v-for="(item,index) in shopList"
+        :key="index"
+        num="2"
+        price="2.00"
+        :desc="item.address"
+        :title="item.shopName"
+        :thumb="item.picUrl"
+      />
+    </van-list>
   </div>
 </template>
 
@@ -124,6 +132,8 @@ export default {
   //放数据
   data() {
     return {
+      fixe: false,
+      searchfix: false,
       fix: "true",
       value1: 0,
       value: "",
@@ -132,7 +142,13 @@ export default {
       outside: [],
       //列表页
       res: [],
-      active: 0
+      active: 0,
+
+      //懒加载
+      list: [],
+      loading: false,
+      finished: false,
+      shopList: []
     };
   },
 
@@ -144,6 +160,27 @@ export default {
       this.$router.push({
         name: "detail",
         params: { id, name: "lin" }
+      });
+    },
+    //列表页
+    async getshopList() {
+      //获取商店信息
+      let poilist = await this.$axios.post(
+        "https://www.easy-mock.com/mock/5d3fe0fc738f621651cd1f4a/list/poilist"
+      );
+      this.shopList = [...this.shopList, ...poilist.data.data.shopList];
+      // 加载状态结束
+      this.loading = false;
+
+      // 数据全部加载完成
+      if (this.shopList.length >= 40) {
+        this.finished = true;
+      }
+    },
+    //地址
+    adrto() {
+      this.$router.push({
+        name: "adr"
       });
     }
   },
@@ -159,21 +196,39 @@ export default {
       "https://www.easy-mock.com/mock/5d40123c05c59f1e0bf0bbdf/list/entries"
     );
     this.entrieslist = data.data.data.entries;
-
     //下拉菜单
     let menu = await this.$axios(
       "https://www.easy-mock.com/mock/5d40123c05c59f1e0bf0bbdf/list/outside"
     );
     this.outside = menu.data.outside.inside_sort_filter;
-    // console.log(outside);
-
     //列表页
     let list = await this.$axios(
       "https://www.easy-mock.com/mock/5d40123c05c59f1e0bf0bbdf/list/res"
     );
     this.res = list.data.items;
-    console.log(this.res);
+    this.getshopList();
   },
+
+  //生命周期活跃，吸顶
+  activated() {
+    window.onscroll = () => {
+      if (window.scrollY >= 330) {
+        this.fixe = true;
+      } else {
+        this.fixe = false;
+      }
+      if (window.scrollY >= 50) {
+        this.searchfix = true;
+      } else {
+        this.searchfix = false;
+      }
+    };
+  },
+  //不活跃
+  deactivated() {
+    window.onscroll = null;
+  },
+
   //过滤器
   filters: {
     handleMenu(outside) {
@@ -187,13 +242,26 @@ export default {
     }
   }
 };
-//   window.onscroll = () => {
-//   let topY = scrollY;
-
-//   console.log(topY);
-
-//   if (topY > 750) {
-//       created();
-//   }
-// };
 </script>
+<style>
+.box {
+  background: #fafafa;
+  position: relative;
+  height: 110px;
+  width: 353px;
+  padding: 12px 0px 0px 15px;
+}
+.fixe {
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  z-index: 99;
+}
+.searchfix {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 99;
+}
+</style>
+

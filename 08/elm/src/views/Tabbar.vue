@@ -1,7 +1,8 @@
 <template>
   <div>
-    <router-view></router-view>
-
+    <keep-alive :max="10">
+      <router-view></router-view>
+    </keep-alive>
     <!-- 标签栏 -->
     <van-tabbar v-model="active">
       <van-tabbar-item
@@ -43,7 +44,6 @@ export default {
           url: "mine"
         }
       ]
-     
     };
   },
   methods: {
